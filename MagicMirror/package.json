@@ -73,6 +73,7 @@
 		"digest-fetch": "^1.2.0",
 		"eslint": "^7.29.0",
 		"express": "^4.17.1",
+		"express-fileupload": "^1.2.1",
 		"express-ipfilter": "^1.2.0",
 		"feedme": "^2.0.2",
 		"helmet": "^4.6.0",

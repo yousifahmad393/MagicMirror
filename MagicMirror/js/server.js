@@ -1,18 +1,17 @@
-/* Magic Mirror
- * Server
- *
- * By Michael Teeuw https://michaelteeuw.nl
- * MIT Licensed.
- */
 const express = require("express");
 const app = require("express")();
 const path = require("path");
 const ipfilter = require("express-ipfilter").IpFilter;
 const fs = require("fs");
 const helmet = require("helmet");
-
+const { equal } = require("assert");
+const upload = require("express-fileupload");
+const { exec } = require("child_process");
 const Log = require("logger");
 const Utils = require("./utils.js");
+const { execFile } = require("child_process");
+
+app.use(upload());
 
 /**
  * Server
@@ -88,7 +87,55 @@ function Server(config, callback) {
 
 		res.send(html);
 	});
-
+	//custom route for the dashboard
+	app.get("/dashboard", (req, res) => {
+		//get the current path of the file
+		var path = __dirname;
+		//get the length of the path
+		var length = path.length;
+		var newPath = path.substr(0, length - 3);
+		//res.send("<h1> the path is :" +  newPath);
+		console.log("-----------------------------------" + newPath);
+		res.sendFile(newPath + "/views/index.html");
+	});
+	//
+	app.get("/newUsers", (req, res) => {
+		var path = __dirname;
+		var length = path.length;
+		var newPath = path.substr(0, length - 3);
+		res.sendFile(newPath + "/views/newusers.html");
+	});
+	//
+	app.post("/createNewUser", (req, res) => {
+		if (req.files) {
+			var files = req.files.file;
+			var userName = req.body.name;
+			var path = __dirname;
+			var length = path.length;
+			var newPath = path.substr(0, length - 3);
+			exec("mkdir " + newPath + "/modules/MMM-Face-Reco-DNN/dataset/" + userName, async (err, stdout, stderr) => {
+				if (err) {
+					console.log(err);
+					res.send("user exists");
+					return;
+				}
+				for (let index = 0; index < files.length; index++) {
+					const toBeUploaded = files[index];
+					console.log(toBeUploaded);
+					toBeUploaded.mv(newPath + "/modules/MMM-Face-Reco-DNN/dataset/" + userName + "/img" + index + ".jpg");
+				}
+				res.send("Uploaded successfully! it will take about 5 minutes to add the new users to the database.");
+			});
+			exec("/home/pi/newUsers.sh", (err, stdout, stderr) => {
+				if (err) {
+					console.log(err);
+					res.send(err);
+					return;
+				}
+				res.send("adding new user");
+			});
+		}
+	});
 	if (typeof callback === "function") {
 		callback(app, io);
 	}

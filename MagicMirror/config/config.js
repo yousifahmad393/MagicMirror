@@ -1,12 +1,12 @@
 /* Magic Mirror Config Sample
 *
-* By Michael Teeuw http://michaelteeuw.nl
-* MIT Licensed.
+* 
+*
 */
 var config = {
 	"port": 8080,
 	"language": "en",
-	"timeFormat": 24,
+	"timeFormat": 12,
 	"units": "metric",
 	"modules": [
 		{
@@ -22,8 +22,7 @@ var config = {
 		{
 			"module": "clock",
 			"header": "CLOCK",
-			"classes":'always',
-			"position": "bottom_left",
+			"position": "top_right",
 			"config": {
 				"calendars": [
 					{
@@ -43,140 +42,131 @@ var config = {
 				"showSourceTitle": false,
 				"showPublishDate": false,
 				"showWeek": true
-			}
+			},
+			"classes": "Ali"
 		},
 		{
 			"module": "calendar",
 			"header": "Bahrain Holidays",
 			"position": "top_left",
-			"classes":'yusuf',
 			"config": {
 				"calendars": [
 					{
 						"symbol": "calendar-check",
-						//"url": "webcal://www.calendarlabs.com/ical-calendar/ics/76/US_Holidays.ics"
 						"url": "https://www.officeholidays.com/ics/bahrain"
 					}
 				]
-			}
+			},
+			"classes": "yusuf"
 		},
 		{
 			"module": "compliments",
 			"position": "lower_third",
-			"classes":'yusuf'
+			"classes": "yusuf"
 		},
 		{
 			"module": "weather",
 			"position": "top_center",
-			"classes":'always',
 			"config": {
 				"location": "Manama",
 				"locationID": "290340",
 				"weatherProvider": "openweathermap",
 				"type": "current",
 				"apiKey": "60758f8cce095ab429d85a98b096efc5"
-			}
+			},
+			"classes": "Hazza"
 		},
 		{
 			"module": "weather",
 			"header": "Weather Forecast",
-			"position": "top_right",
-			"classes":'always',
+			"position": "bottom_left",
 			"config": {
 				"location": "Manama",
 				"locationID": "290340",
 				"weatherProvider": "openweathermap",
 				"type": "forecast",
 				"apiKey": "60758f8cce095ab429d85a98b096efc5"
-			}
+			},
+			"classes": "everyone"
 		},
 		{
 			"module": "newsfeed",
 			"position": "bottom_bar",
-			"classes":'always',
 			"config": {
 				"feeds": [
 					{
-						"title": "New York Times",
-						"url": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+						"title": "Bahrain News",
+						"url": "https://www.bna.bh/en/GenerateRssFeed.aspx?categoryId=153"
 					}
 				],
 				"showSourceTitle": true,
 				"showPublishDate": true,
 				"broadcastNewsFeeds": true,
 				"broadcastNewsUpdates": true
-			}
+			},
+			"classes": "yusuf"
 		},
-{
-    module: 'MMM-Face-Reco-DNN',
-    config: {
-      // Logout 15 seconds after user was not detected any more
-      // If they are detected within this period, the delay will start again
-      logoutDelay: 3000,
-      // How often the recognition starts in milliseconds
-      // With a Raspberry Pi 3+ it works well every 2 seconds
-      checkInterval: 1000,
-      // Module set used for when there is no face detected ie no one is in front of the camera
-      noFaceClass: 'noface',
-      // Module set used for when there is an unknown/unrecognised face detected
-      unknownClass: 'unknown',
-      // Module set used for when there is a known/recognised face detected
-      knownClass: 'known',
-      // Module set used for strangers and if no user is detected
-      defaultClass: 'default',
-      // Set of modules which should be shown for any user ie when there is any face detected
-      everyoneClass: 'everyone',
-      // Set of modules that are always shown - show if there is a face or no face detected
-      alwaysClass: 'always',
-      // XML to recognize with haarcascade
-      cascade: 'modules/MMM-Face-Reco-DNN/tools/haarcascade_frontalface_default.xml',
-      // Pre-encoded pickle with the faces
-      encodings: 'modules/MMM-Face-Reco-DNN/tools/encodings.pickle',
-      // Use Raspberry Pi camera or another type
-      // 1 = RasPi camera, 0 = other camera
-      usePiCamera: 0,
-      // If using another type of camera, you can choose
-      // i.e. 0 = /dev/video0 or 'http://link.to/live'
-      source: 0,
-      // Rotate camera
-      rotateCamera: 0,
-      // Method of facial recognition
-      // dnn = deep neural network, haar = haarcascade
-      method: 'dnn',
-      // Which face detection model to use
-      // "hog" is less accurate but faster on CPUs
-      // "cnn" is a more accurate deep-learning model which is GPU/CUDA accelerated
-      detectionMethod: 'hog',
-      // How long in milliseconds modules take to hide and show
-      animationSpeed: 0,
-      // Path to Python to run the face recognition
-      // null or '' means default path
-      pythonPath: null,
-      // Should a welcome message be shown using the MagicMirror alerts module?
-      welcomeMessage: true,
-      // Dictionary for person name mapping in welcome message
-      // Allows for displaying name with complex character sets in welcome message e.g. jerome => Jérôme, hideyuki => 英之
-      usernameDisplayMapping: null,
-      // Capture new pictures of recognized people, if unknown we save it in folder "unknown"
-      // So you can extend your dataset and retrain it afterwards for better recognitions
-      extendDataset: false,
-      // If extendDataset is true, you need to set the full path of the dataset
-      dataset: 'modules/MMM-Face-Reco-DNN/dataset/',
-      // How much distance between faces to consider it a match. Lower is more strict.
-      tolerance: 0.45,
-      // allow multiple concurrent user logins, 0=no, any other number is the maximum number of concurrent logins
-      multiUser: 0,
-    }
-}
-
+		{
+			"module": "MMM-NowPlayingOnSpotify",
+			"position": "bottom_right",
+			"config": {
+				"showCoverArt": "true",
+				"clientID": "cef8e45ad1e6474e99bdbfbd7fd520c3",
+				"clientSecret": "bd1bd0e3be6a4d9b848a5d66ad3c74e1",
+				"accessToken": "BQDjno9YZFun5rgEnX6wC_qNxM3CNezWxKMcTYNTkv9g8ezoPy4yvQlxqRh1yUk8h2Qlit2_ruKYwwQaGlvUlMEN7wLkL19WxTH9qcRrdfDO7XoRg7aqR5lePiCTEbI7wJSgCwcP-0m4qtPQLpmA4w2Ad7sBySep6ylMW3Z1Pw",
+				"refreshToken": "AQCQKtFGT7nDXAJE2xW9WOu9axEseVNpr4F64agOM9i4V6H-1YEi-VtPkHcajJkaGR41AqAC3KlPCZLlOXTbUJXmvfaNCoeH8BZaYZ8jIO8_0DMpEn2m4YaM7wVwNNHdPSs"
+			},
+			"classes": "everyone"
+		},
+		{
+  module: 'MMM-MyPrayerTimes',
+  position: 'top_right',
+  header: 'My Prayer Times',
+  "classes":"yusuf",
+  config: {
+          mptLat: 26.17361,				// Replace with the latitude of your location
+	  mptLon: 50.54778,				// Replace with the Longitude of your location
+	  mptMethod: 3,			// Which calculation methode is used, see options below
+	  mptOffset: "0,0,0,0,0,0,0,0,0",	// Time corrections for your location: Imsak, Fajr, Sunrise, Duhr, Asr, Sunset, Maghrib, Isha, Midnight
+	  showSunrise: true,			// Display Sunrise, false if you want to hide
+	  showSunset: true,			// Display Sunset, false if you want to hide
+	  showMidnight: true,			// Display Midnight, false if you want to hide
+	  showImsak: true,			// Display Imsak, false if you want to hide
+	  show24Clock: true,			// Default display 24hour clock -> false is 12hour (AM/PM) clock
+	  }
+},
+		{
+			"module": "MMM-Face-Reco-DNN",
+			"config": {
+				"logoutDelay": 3000,
+				"checkInterval": 1000,
+				"noFaceClass": "noface",
+				"unknownClass": "unknown",
+				"knownClass": "known",
+				"defaultClass": "default",
+				"everyoneClass": "everyone",
+				"alwaysClass": "always",
+				"cascade": "modules/MMM-Face-Reco-DNN/tools/haarcascade_frontalface_default.xml",
+				"encodings": "modules/MMM-Face-Reco-DNN/tools/encodings.pickle",
+				"usePiCamera": 0,
+				"source": 0,
+				"rotateCamera": 0,
+				"method": "dnn",
+				"detectionMethod": "hog",
+				"animationSpeed": 0,
+				"pythonPath": null,
+				"welcomeMessage": true,
+				"usernameDisplayMapping": null,
+				"extendDataset": false,
+				"dataset": "modules/MMM-Face-Reco-DNN/dataset/",
+				"tolerance": 0.4,
+				"multiUser": 0
+			}
+		}
 	],
-	"address": "localhost",
+	"address": "0.0.0.0",
 	"basePath": "/",
-	"ipWhitelist": [
-		"127.0.0.1",
-		"::ffff:127.0.0.1",
-		"::1"
-	],
+	"ipWhitelist": [],
 	"useHttps": false,
 	"httpsPrivateKey": "",
 	"httpsCertificate": "",

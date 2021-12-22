@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MM Home-Page</title>
+    <style>
+      :root {
+        --primary-color: #3d405b;
+        --background-color: #f4f1de;
+        --secondry-color: #e07a5f;
+        --hover-color: #81b29a;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        border: none;
+        font-family: Arial;
+      }
+
+      .container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--background-color);
+      }
+
+      .row {
+        width: 50%;
+        height: 50%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--primary-color);
+        transition: 0.3s;
+        transition-timing-function: ease-in;
+      }
+
+      a:hover {
+        color: white;
+        background-color: var(--hover-color);
+      }
+
+      .items {
+        width: 100%;
+        height: 40%;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        justify-content: space-between;
+        align-items: center;
+        border: solid 1px rgba(255, 204, 0, 0);
+        border-radius: 1em;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+        /* padding: 1em; */
+        margin: 0 1em;
+        background-color: var(--secondry-color);
+      }
+
+      .item-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .item-content:hover {
+        border: solid 1px var(--hover-color);
+        border-radius: 1em;
+        /* box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px; */
+        background-color: var(--hover-color);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div>
+        <h1 style="color: var(--primary-color)">Magic Mirror home page</h1>
+      </div>
+      <div class="row">
+        <a class="items" href="/MMM-Admin-Interface">
+          <div class="item-content">
+            <h3>Admin Panel</h3>
+          </div>
+        </a>
+        <a class="items" href="/NewUsers">
+          <div class="item-content">
+            <h3>New user form</h3>
+          </div>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
